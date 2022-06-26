@@ -98,6 +98,8 @@ https://anaconda.org/conda-forge/wslpath
 
 ## 注意点
 
+### パッケージ名の大文字が小文字になる
+
 本家コマンドは`wslpath`でありさすがに丸かぶりは避けたかったので`wslPath`とcamelCaseにしました。  
 
 PyPIでは`wslPath`のままで表記されたのですが、conda-forgeでは`wslpath`と小文字となってしまいました。
@@ -107,12 +109,15 @@ PyPIでは`wslPath`のままで表記されたのですが、conda-forgeでは`w
 
 いちおう`conda install -c conda-forge wslPath`とcamelCaseにしてもインストールできました。
 
+### BioCondaとの違い
+
+- BioCondaは登録時に[パッケージについて簡単な説明を付ける](https://github.com/bioconda/bioconda-recipes/pull/30635)必要がありましたが、conda-forgeは必要ありませんでした。
+
+- PyPIパッケージをUpgradeした場合、BioCondaはPyPIに同期して全自動でUpgradeしてくれます。一方でconda-forgeは[`@conda-forge-admin,please add bot automerge`というタイトルをつけてPRをマージする](https://github.com/conda-forge/wslpath-feedstock/commit/14cb6d3688b87ea0cd43efcef813aa4bd1174a0c)必要があるみたいです。
+
 ## おわりに
 
 思った以上に簡単にconda-forgeに登録できました。
 
-Biocondaのときには[パッケージについて簡単な説明を付ける必要があったりした](https://github.com/bioconda/bioconda-recipes/pull/30635)のですが、conda-forgeはとくにございませんでした。
-
-
-また`grayskull`で`meta.yaml`を自動生成できるのは目からウロコでした。自動生成されたファイルについて手直しがまったく必要なかったので、登録のハードルが劇的に下がりました。別の機会にBioCondaに登録するときにも使おうと思います。
+とくに`grayskull`で`meta.yaml`を自動生成できるのは目からウロコでした。自動生成されたファイルについて手直しがまったく必要なかったので、登録のハードルが劇的に下がりました。別の機会にBioCondaに登録するときにも使おうと思います。
 
