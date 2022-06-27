@@ -1,5 +1,3 @@
-# Conda Forgeに登録してみた
-
 ## 3行でまとめると
 
 - 自作PyPIパッケージをconda-forgeに登録してみました
@@ -16,10 +14,18 @@ WindowsとPOSIXのパスを変換するシンプルなPythonモジュールで�
 
 https://github.com/akikuno/wslPath
 
+## conda-forgeとは
+
+https://conda-forge.org/
+
+condaでインストールできるパッケージを集めたコミュニティ主体のリポジトリです。
+
+[公開されているパッケージ数が18,444 ](https://anaconda.org/conda-forge
+)（2022-06-27現在） と、condaのなかでもっとも巨大なリポジトリのひとつとなっています。
 
 ## ガイドライン
 
-おおよそ以下の登録手順に従いました。
+おおよそ以下の登録手順に従いました。（2022年6月閲覧）
 
 https://conda-forge.org/docs/maintainer/adding_pkgs.html
 
@@ -54,11 +60,11 @@ https://github.com/conda-forge/staged-recipes
 
 ```bash
 git clone https://github.com/akikuno/staged-recipes.git
-mkdir -p staged-recipes/recipes/wskPath/
-cp wslPath/meta.yaml staged-recipes/recipes/wskPath/
+mkdir -p staged-recipes/recipes/wslPath/
+cp wslPath/meta.yaml staged-recipes/recipes/wslPath/
 ```
 
-そして変更をcommitします。（VScodeのGUIでやってしまったのでコマンドは割愛します。）
+そののち、変更をcommitします。（VScodeのGUIでやってしまったのでコマンドは割愛します。）
 
 ## Pull requestを送る
 
@@ -76,7 +82,7 @@ https://github.com/conda-forge/staged-recipes/pull/19381
 
 の2点に注意すれば大丈夫でした。
 
-いちおうChecklistはすべて埋めました。
+念のためチェックリストはすべて埋めました。
 
 `@conda-forge/help-python`はどうやら自動チェックが終わった後にやるべきだったようです。
 
@@ -106,9 +112,9 @@ https://anaconda.org/conda-forge/wslpath
 
 [PyPIでは`wslPath`のまま表記された](https://pypi.org/project/wslPath/)のですが、conda-forgeでは`wslpath`と小文字となってしまいました。
 
-::message alert
+:::message alert
 **パッケージ名がすべて小文字になる**というのは注意点かと思います。
-::
+:::
 
 いちおう`conda install -c conda-forge wslPath`とcamelCaseにしてもインストールできました。
 
@@ -116,11 +122,12 @@ https://anaconda.org/conda-forge/wslpath
 
 - BioCondaは登録時に[パッケージについて簡単な説明を付ける](https://github.com/bioconda/bioconda-recipes/pull/30635)必要がありましたが、conda-forgeは必要ありませんでした。
 
-- PyPIパッケージをUpgradeした場合、BioCondaはPyPIに同期して全自動でUpgradeしてくれます。一方でconda-forgeは[`@conda-forge-admin,please add bot automerge`というタイトルをつけてPRをマージする](https://github.com/conda-forge/wslpath-feedstock/commit/14cb6d3688b87ea0cd43efcef813aa4bd1174a0c)必要があるみたいです。
+- PyPIパッケージを更新した際にBioCondaはPyPIに同期して全自動で更新作業をしてくれます。一方でconda-forgeは[`@conda-forge-admin,please add bot automerge`というタイトルをつけてPRをマージする](https://github.com/conda-forge/wslpath-feedstock/commit/14cb6d3688b87ea0cd43efcef813aa4bd1174a0c)必要があるみたいです。
 
 ## おわりに
 
-思った以上に簡単にconda-forgeに登録できました。
+`grayskull`で`meta.yaml`を自動生成できるのは目からウロコでした。自動生成されたファイルについて手直しがまったく必要なかったので、登録のハードルが劇的に下がりました。別の機会にBioCondaに登録するときにも使おうと思います。
 
-とくに`grayskull`で`meta.yaml`を自動生成できるのは目からウロコでした。自動生成されたファイルについて手直しがまったく必要なかったので、登録のハードルが劇的に下がりました。別の機会にBioCondaに登録するときにも使おうと思います。
+分野によっては多言語のパッケージを組み合わせて利用することが多く、複数のパッケージマネージャーを使う必要があることがあります。condaは多言語に対応しているので、condaでパッケージを登録しておくとcondaだけで環境構築が完結できることが大きな利点です。
 
+PyPIに登録済みのパッケージであれば想像よりもはるかに簡単にcondaに登録できるので、ぜひトライしてみてください。
