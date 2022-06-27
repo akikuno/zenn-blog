@@ -3,12 +3,12 @@
 ## 3行でまとめると
 
 - 自作PyPIパッケージをconda-forgeに登録してみました
-- `grayskull`での`meta.yaml`自動生成機能が神
+- `grayskull`による`meta.yaml`自動生成機能が神
 - パッケージ名に大文字があると小文字に変換されてしまうので注意
 
 ## はじめに
 
-これまで自作パッケージを[PyPI](https://pypi.org/manage/projects/)や[BioConda](https://bioconda.github.io/search.html?q=akikuno)に登録したことはありましたが、conda-forgeへは経験がありませんでした。
+これまで自作パッケージを[PyPI](https://pypi.org/search/?q=akikuno)や[BioConda](https://bioconda.github.io/search.html?q=akikuno)に登録したことはありましたが、conda-forgeへはまだ経験がありませんでした。
 
 ちょうど最近conda-forgeに提出できそうなパッケージを作ったので、試してみました。
 
@@ -19,14 +19,14 @@ https://github.com/akikuno/wslPath
 
 ## ガイドライン
 
-以下の登録手順を参考にしました。
+おおよそ以下の登録手順に従いました。
 
 https://conda-forge.org/docs/maintainer/adding_pkgs.html
 
 
 ## `grayskull`のインストール
 
-ガイドラインにしたがって`grayskull`をインストールしました。
+ガイドラインにしたがって`grayskull`をインストールします。
 どうやら自動で`meta.yaml`を生成してくれるツールのようです。
 
 ```python
@@ -65,13 +65,15 @@ cp wslPath/meta.yaml staged-recipes/recipes/wskPath/
 以下のフォークしたリポジトリを開くと、`This branch is 1 commit ahead of conda-forge:main.`となっています。  
 `1 commit ahead`をクリックして`View pull request`を押すとPull requestを送ることができます。
 
-そうするとフォーク先（conda-forge）のPull requestsに移行しまして、いよいよ登録作業が始まります。
+そうするとフォークもと（conda-forge）のPull requests画面に移行しまして、いよいよ登録作業が始まります。
 
 https://github.com/conda-forge/staged-recipes/pull/19381
 
-いろいろと細かい注意事項を見せられますが、  
+いろいろと細かい注意事項が書いてありますが、  
+
 1. Pull requestのタイトルを意味のあるものにする
 2. `@conda-forge/help-python`などで特定のコミュニティにレビューを依頼する  
+
 の2点に注意すれば大丈夫でした。
 
 いちおうChecklistはすべて埋めました。
@@ -88,11 +90,11 @@ https://github.com/conda-forge/staged-recipes/pull/19381
 
 今回は金曜日の正午にレビューを依頼して、土曜日の深夜にマージされました。
 
-コミュニティの迅速な対応に深謝いたします。
+conda-forgeコミュニティの迅速な対応に深謝いたします。
 
 ## 結果
 
-conda-forgeに登録することができました。
+無事、conda-forgeに登録することができました。
 
 https://anaconda.org/conda-forge/wslpath
 
@@ -100,12 +102,13 @@ https://anaconda.org/conda-forge/wslpath
 
 ### パッケージ名の大文字が小文字になる
 
-本家コマンドは`wslpath`でありさすがに丸かぶりは避けたかったので`wslPath`とcamelCaseにしました。  
+本家コマンドは`wslpath`であり、さすがに丸かぶりは避けたかったので`wslPath`とcamelCaseにしました。  
 
-PyPIでは`wslPath`のままで表記されたのですが、conda-forgeでは`wslpath`と小文字となってしまいました。
+[PyPIでは`wslPath`のまま表記された](https://pypi.org/project/wslPath/)のですが、conda-forgeでは`wslpath`と小文字となってしまいました。
 
+::message alert
 **パッケージ名がすべて小文字になる**というのは注意点かと思います。
-
+::
 
 いちおう`conda install -c conda-forge wslPath`とcamelCaseにしてもインストールできました。
 
