@@ -16,5 +16,8 @@
     "url": "https://github.com/akikuno/zenn-blog/issues"
   },
   "homepage": "https://github.com/akikuno/zenn-blog#readme",
-  "description": ""
+  "description": "* [📘 How to use](https://zenn.dev/zenn/articles/zenn-cli-guide)",
+  "dependencies": {
+    "zenn-cli": "^0.1.154"
+  }
 }
