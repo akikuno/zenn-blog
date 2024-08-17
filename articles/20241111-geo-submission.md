@@ -8,15 +8,15 @@ published: false
 
 # はじめに
 
-[Gene Expression Omnibus (GEO)](https://www.ncbi.nlm.nih.gov/geo/) にRNA-seqデータを投稿したので、その備忘録です。
+[Gene Expression Omnibus (GEO)](https://www.ncbi.nlm.nih.gov/geo/) にRNA-seqデータを投稿したので、その備忘録です
 
 # Gene Expression Omnibus (GEO) ってなんですか？
 
-機能ゲノミクスのデータ (RNA-seq, ChIP-seq, HiCなど) を格納するリポジトリです。
+機能ゲノミクスのデータ (RNA-seq, ChIP-seq, HiCなど) を格納するリポジトリです
 
 
 :::message
-生のシークエンスデータは[Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) に投稿します。
+生のシークエンスデータは[Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) に投稿します
 :::
 
 # 情報源
@@ -26,22 +26,30 @@ published: false
 
 # 今回のケース
 
-投稿するデータはマウス胚をRNA-seqにかけて得られたFASTQファイルです。  
+投稿するデータはマウス胚をRNA-seqにかけて得られたFASTQファイルです
 
-## 0. ログイン
+<!-- ## 0. ログイン
 
-- [Submission Protal](https://submit.ncbi.nlm.nih.gov/subs/sra/)からログインします。
-- Google Accountでも認証できるので便利です。
+- [Submission Protal](https://submit.ncbi.nlm.nih.gov/subs/sra/)からログインします
+- Google Accountでも認証できるので便利です -->
 
-## 1. FASTQのアップロード
+## 1. FASTQをまとめます
 
-:::message
 FASTQはすべて**gzipに圧縮**して、**単一のフォルダ**に格納します。
-- gzip圧縮すると転送が速く済みます。
-- 単一のフォルダに格納すると転送するコマンドが簡単になります。
-:::
 
-- 重たいファイル(>10GB)や数が多いファイル(>300)については、まずNCBIのサーバーにデータをアップロードすること（`preload option`）が推奨されています。
+- gzip圧縮するとファイルサイズが小さくなるので、転送が速く済みます。
+- 単一のフォルダに格納すると、転送するときのコマンドが簡単になります。
+
+## 2. 各FASTQについて、md5チェックサムを計算します
+
+- `md5sum`コマンドでファイルのチェックサムを計算します
+
+```bash
+#!/bin/bash
+md5sum *.gz > md5sum.txt
+```
+
+<!-- - 重たいファイル(>10GB)や数が多いファイル(>300)については、まずNCBIのサーバーにデータをアップロードすること（`preload option`）が推奨されています。
 - 今回は100つくらいのファイルで、まあまあの数だったので`preload`を選択しました。
 - `preload`の方法にもいろいろあるようですが、今回は使用経験のある`FTP upload`にしました。
 	- [IBM Aspera Connect](https://www.ibm.com/aspera/connect/)を使うと高速に転送できるみたいです。
@@ -60,7 +68,7 @@ cd uploads/<フォルダ名>
 mkdir -p <ユニークなフォルダ名>
 cd <ユニークなフォルダ名>
 put -R <FASTQが格納されているフォルダのパス>
-```
+``` -->
 ![](https://storage.googleapis.com/zenn-user-upload/52affa6965e5-20220829.png)
 
 ## 2. GENERAL INFO
